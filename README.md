@@ -78,10 +78,89 @@ I transferred Sepolia ETH from these faucets to my MetaMask wallet, which allowe
 ### 1. Change the metadata and mint another NFT.
 
 
+```
+
+const metadata = {
+    attributes: [
+        { trait_type: "Course", value: "Blockchain Basics" },
+        { trait_type: "Name", value: "Naruto" }
+    ],
+    description: "Course Credits Certificate in Blockchain Basics",
+    image: "ipfs://QmVxFXNuVJdk5QFzvkpSSeXypdDsCf8LET1kDnkZQBFyvj",
+    name: "Blockchain Basics Certificate"
+};
+
+https://gateway.pinata.cloud/ipfs/Qmc5FvC7B6B5XMMqXDhgADpqHM4mTDehiS52Fcswy32Wv1
+
+// Call the mintNFT function with the new metadata
+mintNFT(metadata);
+
+```
+
+
 ### 2. Investiage how to actually view your NFT certificate that is stored on IPFS via Pinata.
+
+Access Your Pinata Account:
+
+1.Go to the Pinata website and log in to your account.
+Navigate to the Pin Manager to see your pinned files.
+Locate Your Metadata File:
+
+2. In the Pin Manager, search for the metadata JSON file associated with your NFT. This file typically contains details about your NFT, including its name, description, image URL, attributes, and the IPFS link for the certificate.
+
+ Copy the IPFS Link:
+
+Click on the metadata file to view its details. You should see an IPFS gateway URL. It will look something like this:
+
+My Example Link:
+https://gateway.pinata.cloud/ipfs/Qmc5FvC7B6B5XMMqXDhgADpqHM4mTDehiS52Fcswy32Wv1
+
+Access the Metadata JSON:
+
+```
+{
+  "attributes": [
+    {
+      "trait_type": "Course",
+      "value": "Blockchain Basics"
+    },
+    {
+      "trait_type": "Name",
+      "value": "Alice Doe"
+    }
+  ],
+  "description": "Course Credits Certificate in Blockchain Basics",
+  "image": "ipfs://QmVxFXNuVJdk5QFzvkpSSeXypdDsCf8LET1kDnkZQBFyvj",
+  "name": "Blockchain Basics Certificate"
+}
+```
 
 
 ### 3. Write a script to generate a new random NFT every time mint is called.
+
+```
+function getRandomNFTMetadata() {
+    const courses = ["Blockchain Basics", "Cryptocurrency", "Smart Contracts"];
+    const names = ["Alice Doe", "Bob Smith", "Charlie Brown"];
+    const randomCourse = courses[Math.floor(Math.random() * courses.length)];
+    const randomName = names[Math.floor(Math.random() * names.length)];
+    
+    return {
+        attributes: [
+            { trait_type: "Course", value: randomCourse },
+            { trait_type: "Name", value: randomName }
+        ],
+        description: `Course Credits Certificate in ${randomCourse}`,
+        image: "ipfs://QmVxFXNuVJdk5QFzvkpSSeXypdDsCf8LET1kDnkZQBFyvj", // Adjust this for random images if needed
+        name: `${randomCourse} Certificate`
+    };
+}
+
+// Call the mintNFT function with random metadata
+const randomMetadata = getRandomNFTMetadata();
+mintNFT(randomMetadata);
+
+```
 
 
 
