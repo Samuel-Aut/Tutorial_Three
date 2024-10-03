@@ -1,7 +1,0 @@
-console.log("Deployer balance:", ethers.utils.formatEther(balance));
-const balance = await deployer.getBalance();
-const [deployer] = await ethers.getSigners();
-consconsole.log("Deployer balance:", ethers.utils.formatEther(balance));
-const [deployer] = await ethers.getSigners();
-consconsole.log("Deployer balance:", ethers.utils.formatEther(balance));
-const [deployer] = await ethers.getSigners();

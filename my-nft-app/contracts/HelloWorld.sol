@@ -1,25 +1,27 @@
 // SPDX-License-Identifier: UNLICENSED
 // Specifies the version of Solidity, using semantic versioning.
-// Learn more: https://solidity.readthedocs.io/en/v0.5.10/layout-of-source-files.html#pragma
 pragma solidity >=0.7.3;
 
 // Defines a contract named `HelloWorld`.
-// A contract is a collection of functions and data (its state). Once deployed, a contract resides at a specific address on the Ethereum blockchain. Learn more: https://solidity.readthedocs.io/en/v0.5.10/structure-of-a-contract.html
 contract HelloWorld {
 
-   //Emitted when update function is called
-   //Smart contract events are a way for your contract to communicate that something happened on the blockchain to your app front-end, which can be 'listening' for certain events and take action when they happen.
+   // Emitted when update function is called
    event UpdatedMessages(string oldStr, string newStr);
+   
+   // Emitted when tokens are minted
+   event Minted(address indexed to, uint256 amount);
 
    // Declares a state variable `message` of type `string`.
-   // State variables are variables whose values are permanently stored in contract storage. The keyword `public` makes variables accessible from outside a contract and creates a function that other contracts or clients can call to access the value.
    string public message;
 
-   // Similar to many class-based object-oriented languages, a constructor is a special function that is only executed upon contract creation.
-   // Constructors are used to initialize the contract's data. Learn more:https://solidity.readthedocs.io/en/v0.5.10/contracts.html#constructors
-   constructor(string memory initMessage) {
+   // Declares a mapping to hold the balances of minted tokens for each address.
+   mapping(address => uint256) public balances;
 
-      // Accepts a string argument `initMessage` and sets the value into the contract's `message` storage variable).
+   // Declares a variable to track the total supply of minted tokens.
+   uint256 public totalSupply;
+
+   // Constructor to initialize the contract's `message` state variable.
+   constructor(string memory initMessage) {
       message = initMessage;
    }
 
@@ -28,5 +30,22 @@ contract HelloWorld {
       string memory oldMsg = message;
       message = newMessage;
       emit UpdatedMessages(oldMsg, newMessage);
+   }
+
+   // A public function to mint new tokens.
+   function mint(uint256 amount) public {
+      require(amount > 0, "Amount must be greater than 0");
+
+      // Update the total supply and the sender's balance
+      totalSupply += amount;
+      balances[msg.sender] += amount;
+
+      // Emit a Minted event
+      emit Minted(msg.sender, amount);
+   }
+
+   // A function to check the balance of tokens for a specific address.
+   function balanceOf(address owner) public view returns (uint256) {
+      return balances[owner];
    }
 }
