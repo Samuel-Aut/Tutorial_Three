@@ -73,7 +73,15 @@ Google Cloud Faucet for Sepolia: https://cloud.google.com/application/web3/fauce
 
 I transferred Sepolia ETH from these faucets to my MetaMask wallet, which allowed me to cover the transaction fees for deploying my contract to the Sepolia testnet. This process is essential for testing smart contracts on the Ethereum blockchain without spending real ETH.
 
+#
 
+### 1. Change the metadata and mint another NFT.
+
+
+### 2. Investiage how to actually view your NFT certificate that is stored on IPFS via Pinata.
+
+
+### 3. Write a script to generate a new random NFT every time mint is called.
 
 
 
